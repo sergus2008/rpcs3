@@ -763,6 +763,11 @@ namespace rsx
 			{
 				util::write_gcm_label<true, false>(ctx, reg, addr, arg);
 			}
+			
+			if (addr < rsx::constants::local_mem_base)
+			{
+				vm::reservation_invalidate(addr, 4);
+			}
 		}
 
 		void back_end_write_semaphore_release(context* ctx, u32 reg, u32 arg)
